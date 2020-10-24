@@ -79,7 +79,7 @@ overflow-y: auto;
 .chattext{position:absolute;top:32px;bottom:0;
 overflow-y:auto;padding:10px 15px 10px;right:0;left:0;
 }
-.pmt,#chatcon{background: url(/gc/img/bg2.jpg);
+.pmt,#chatcon{background: url(iphone-6.jpg);
 background-repeat: no-repeat;
 background-size: 100% 100%;}
 .chattext .mbox{-webkit-box-shadow: 4px 4px 18px 0px rgba(102,102,102,1);
