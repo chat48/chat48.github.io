@@ -1,5 +1,5 @@
 (function(){
-var socket = io.connect("chatid.mywire.org:8080",{
+var socket = io.connect("36.78.2.183:8080",{
   autoConnect: true
 });
 
