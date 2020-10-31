@@ -27,31 +27,21 @@ h3{
 #txmg{position:absolute;left:0;right:124px;height:100%;background:#9CE0FF;border: #067BFF solid 1px;}
 #txmg input{outline:transparent;width:99%;height:38px;border:none;background:transparent;font-size:1em;padding-left:1%;}
 #snmg{position:absolute;width:124px;right:0;height:100%;background:#067BFF;}
-#snmg input{
-	border:none;width:60px;outline:transparent;
-	font-size:1.2em;
-	cursor:pointer;background:url('submit.svg');height:60px;
-background-repeat: no-repeat;background-position:15px 6px;margin-left:1px;
-}
+#snmg input{border:none;width:60px;outline:transparent;font-size:1.2em;cursor:pointer;background:url('submit.svg');height:60px;background-repeat: no-repeat;background-position:15px 6px;margin-left:1px;}
 #shmd{text-align:center;}
-.shmd {padding: 20px;cursor:pointer;margin-left:5px;display: inline-block;background:url('shmd.png');background-repeat: no-repeat;background-position:5px 6px;background-size: 160px 40px;}
-#mp4s{background-position:-80px 3px;
-}
-#mp3s{background-position:-40px 3px;
-}
-#ytb{background-position:-120px 3px;;
-}
-#jpgs{background-position:0px 3px;
-}
+.shmd {padding: 20px;cursor:pointer;border:#222 solid 1px;border-radius:5px;margin-left:10px;display: inline-block;background:url('shmd.png');background-repeat: no-repeat;background-position:5px 6px;background-size: 160px 40px;}
+#mp4s{background-position:-80px 0px;}
+#mp3s{background-position:-40px 0px;}
+#ytb{background-position:-120px 0px;}
+#jpgs{background-position:0px 0px;}
 .upload{display:none;}
 #upmd{text-align:center;}
-.upmd {padding: 20px;cursor:pointer;margin-left:5px;display: inline-block;background:url('upmd.png');background-repeat: no-repeat;background-position:5px 6px;background-size: 160px 40px;}
-#imgu{background-position:-40px 1px;}
-#audu{background-position:-80px 1px;}
-#camu{background-position:-120px 1px;}
-#fstr{background-position:0px 1px;}
-#message{outline:transparent;border:none;font-size:1.4em;overflow: hidden;background:transparent;width:98%;padding:1%;height:100%;
-}
+.upmd {padding: 20px;cursor:pointer;border:#222 solid 1px;border-radius:5px;margin-left:10px;display: inline-block;background:url('upmd.png');background-repeat: no-repeat;background-position:5px 6px;background-size: 160px 40px;}
+#imgu{background-position:-40px 0px;}
+#audu{background-position:-80px 0px;}
+#camu{background-position:-120px 0px;}
+#fstr{background-position:0px 0px;}
+#message{outline:transparent;border:none;font-size:1.4em;overflow: hidden;background:transparent;width:98%;padding:1%;height:100%;}
 
 #msgtx{position:fixed;z-index: 5;left:22%;
 bottom: 0;right:125px;background: #9CE0FF;border-left: #067BFF solid 1px;
