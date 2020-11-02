@@ -265,14 +265,14 @@ left:22%;right:22%;bottom:0;top:0;padding:6px;background:rgba(0,0,0,.6);
 #srmc{background: #d7e7f8;height:40px;position:relative;}
 #srmc input{border:none;width:100%;background:#d7e7f8;outline:none;}
 #srmcin{position:absolute;padding:10px;left:0;right:80px;}
-#srmcbt{position: absolute;width: 60px;padding:10px;color:#fff;font-size:1em;right: 0;background: #0674e0;}
+#srmcbt{position: absolute;width: 60px;padding:10px;color:#fff;height:20px;text-align:center;right: 0;background: #0674e0;}
 #res{margin-bottom:20px;overflow-y:auto;}
 #res h3{font-size:1em;padding-bottom:12px;}
 .cmlist{background:#222;padding:4px;margin-top:-20px;border:#444 1px solid;position: relative;}
 .atwk{display:inline-block;width:100px;}
 .desc{display:inline-block;padding-left:8px;position:absolute;}
 .desc div{overflow:hidden;word-wrap:break-word;}
-.sbut{font-size:1em;border:none;height:24px;cursor:pointer;margin-right:15px;line-height:1px;}
+.sbut{border:none;height:24px;cursor:pointer;margin-right:15px;line-height:1px;}
 .stopms{font-size:1.2em;background:#6633ff;color:#fff;}
 .shre{background:#0066ff;color:#fff;}
 
