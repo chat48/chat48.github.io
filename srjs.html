@@ -497,11 +497,11 @@ o = o.reverse();
 var html="";
 for (x in o){
 var tw="";var dv="";var l1 = 0;
+eval('var im = "id_'+o[x].gift_id+'"');
 if(o[x].gift_id==21 || o[x].gift_id==600222 || o[x].gift_id==30003)tw= 'class="tw"';
 if(a["stage_gift_list"].length>20){
 var l1 = Math.ceil(a["stage_gift_list"].length/2);
 if(a["stage_gift_list"].length>(l1-1)){if(x==0)html += '<div id="l1">';}
-eval('var im = "id_'+o[x].gift_id+'"');
 html += '<img src="'+lgf[im]+'" alt="'+o[x].name+'" '+tw+'>';
 if(x==l1)html += '</div>';
 if(a["stage_gift_list"].length>l1){if(x==l1)html += '<div id="l2">';}
