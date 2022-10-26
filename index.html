@@ -1,0 +1,409 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="zee.png">
+<title>Showroom JKT48</title>
+</head>
+
+<body>
+
+<div class="cat">
+<div id="nav">
+	<a href="?i=15">JKT48</a><a href="?i=12">48Group</a><a href="?i=2">Idol</a><a href="?i=0">Popularity</a><a href="?i=1">Free</a><a href="?i=3">TalentModel</a><a href="?i=4">Music</a><a href="?i=5">Actors&Anime</a><a href="?i=6">TalkShow</a><a href="?i=7">Virtual</a><a href="?i=8">MENS</a><a href="?i=9">Karaoke</a><a href="?i=10">Game</a><a href="?i=11">DOB</a><span id="st"></span>
+</div>
+</div>
+
+
+
+<div class="mcon" id="mcon"></div>
+
+
+<div id="root">
+<a href="?t=1"><img src="zee.png"><span>zee48.com</span></a>
+<div id="tt"><span id="tl">48Group</span> <span id="lv"></span></div>
+</div>
+<div id="pvd">
+<video src="" id="vd" width="400"></video><span id="cl">Close Preview</span>
+</div><div id="fh"><img src="fh.webp"></div><div id="onl">Tak ada yang live untuk saat ini</div>
+<div class="loader" id="loader"></div>
+
+<script src="hls.js"></script>
+<script>
+
+//var onl = JSON.parse(this.responseText); 
+var pv = true;var k=12;var ob1;
+function rfr(){
+var xhttp = new XMLHttpRequest();
+var rto = setTimeout(function(){xhttp.abort();document.querySelector("#lv").innerHTML="Connection error!";},5000);
+var url = "https://justcors.com/tl_5768276/https://www.showroom-live.com/api/live/onlives?t="+new Date().getTime();
+xhttp.onload = function(){
+if(xhttp.readyState == 4 && xhttp.status == 200) {
+clearTimeout(rto);
+document.querySelector("#loader").style.display="none";
+ob1 = JSON.parse(this.responseText);
+sht();
+window.scrollTo(0, 0);
+}
+};
+xhttp.open("GET", url+"?i="+k);
+xhttp.send();
+
+var o;
+function sht(){
+var html="";
+if(k==12 || k==15){
+var a = ob1['onlives'][0]['lives'];
+var a1 = ob1['onlives'][1]['lives'];
+var a2 = ob1['onlives'][2]['lives'];
+var a3 = ob1['onlives'][0]['lives'];
+var a4 = ob1['onlives'][4]['lives'];
+var a5 = ob1['onlives'][5]['lives'];
+var a6 = ob1['onlives'][6]['lives'];
+var a7 = ob1['onlives'][7]['lives'];
+var a8 = ob1['onlives'][8]['lives'];
+var a9 = ob1['onlives'][9]['lives'];
+o = a.concat(a2,a3,a4,a5,a6,a7,a8,a9);
+//o = getUniqueListBy(o,'main_name');
+}else{
+o = ob1['onlives'][k]['lives'];
+}
+
+for (x in o){
+//o[x].image = o[x].image.replace("_s.","_square_s.");
+var vu = o[x].streaming_url_list[0].url;
+if(k==15){if(o[x].room_url_key.indexOf('JKT48_')<0)continue;}
+if(k==12){if(o[x].room_url_key.indexOf('48_')<0)continue;}
+html += '<div class="con lazy"> <div class="inf"><span class="gn">'+o[x].main_name+'</span> <span><a href="https://www.showroom-live.com/api/live/stage_gift_list?room_id='+o[x].room_id+'" target="_blank">♥'+o[x].follower_num+'</a></span> <span class="gn vw" alt="'+o[x].room_id+'">👁'+o[x].view_num+'</span> <span class="vn">🕒'+gtm(o[x].started_at)+'</span></div> <img src="'+o[x].image+'"> <div class="prv"><a href="srjs.html?r='+o[x].room_id+'&t='+o[x].started_at+'&l='+o[x].room_url_key+'&n='+o[x].main_name+'&v='+o[x].view_num+'" alt="'+o[x].room_url_key+'"class="rm" target="_blank">Enter Room</a> <span class="prvw" alt="'+vu+'">Preview</span> </div></div>';
+}
+document.getElementById("mcon").innerHTML=html;
+
+var a = document.querySelectorAll(".prvw");
+for(var i=0;i<a.length;i++){
+a[i].onclick = function(){
+document.querySelector("#pvd").style.display="block";
+load(this.getAttribute("alt"));
+pv = false;
+};
+}
+
+var a = document.querySelectorAll(".prv a");
+for(var i=0;i<a.length;i++){
+a[i].onclick = function(){
+document.querySelector("#cl").click(); 
+};
+}
+
+document.querySelector("#cl").onclick = function(){
+document.querySelector("#pvd").style.display="none";
+document.querySelector("#vd").src="";pv = true; 
+};
+
+var con = document.querySelectorAll(".con").length;
+document.querySelector("#onl").style.display="none";
+if(con==0){document.querySelector("#onl").style.display="block";
+document.querySelectorAll("#lv")[0].innerHTML="";
+}
+if(con>0)document.querySelectorAll("#lv")[0].innerHTML=con+" Onlives";
+document.querySelector("#tl").innerHTML=document.querySelectorAll(".ac")[0].textContent;
+
+var u=""; var not = [];
+var b = document.querySelectorAll(".rm");
+var c = document.querySelectorAll(".con img");
+if(b.length>0){
+for(var i=0;i<b.length;i++){
+var n = b[i].getAttribute("alt");
+if(n.indexOf("JKT48")<0)continue;
+//if(n.indexOf("48_")<0)continue;
+u += 'not'+i+' = new Notification("zee48.com - Showroom", { body: "\\n'+n+' is live now", icon: "'+c[i].src+'"});';
+u += 'not'+i+'.onclick = function(){window.open("'+b[i].href+'");};';
+}
+eval(u);
+}
+lz();
+function getUniqueListBy(arr, key) {
+    return [...new Map(arr.map(item => [item[key], item])).values()]
+}
+
+}//xhttp
+}
+
+setInterval(function(){if(pv)rfr();},60000);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+if (Notification.permission !== 'granted')
+  Notification.requestPermission();
+});
+
+
+function load(vl){
+if(Hls.isSupported()){
+var video = document.getElementById("vd");
+		//video.ondurationchange  = function(){alert("Starting to load video");}; 
+var hls = new Hls();
+hls.loadSource(vl);
+hls.attachMedia(video);
+hls.on(Hls.Events.MANIFEST_PARSED,function()
+{video.currentTime = 4;
+video.play();
+});
+}
+else if (video.canPlayType("application/vnd.apple.mpegurl"))
+{
+video.src = vl;
+video.addEventListener("canplay",function()
+{
+			video.currentTime = 4;
+//video.play();
+});
+}
+}
+
+var dr = true;
+var x = window.location.href.split("i=")[1];
+if(!x)document.querySelectorAll(".cat a")[1].classList.add("ac");
+
+
+var a = document.querySelectorAll(".cat a");
+for(var i=0;i<a.length;i++){
+a[i].onclick = function(e){
+e.preventDefault();
+if(dr)document.querySelector("#loader").style.display="block";
+var b = document.querySelectorAll(".cat a");
+for(var i=0;i<b.length;i++){
+if(dr)b[i].removeAttribute("class");
+}
+if(dr)this.classList.add("ac");
+k=this.href.split("i=")[1];
+if(dr)rfr();
+window.history.pushState({},"","?i="+k);
+};
+var z = a[i].href.split("i=")[1];
+if(z==x)a[i].classList.add("ac");
+}
+
+window.onpopstate = function(e) {
+document.querySelector("#loader").style.display="block";
+k=window.location.href.split("i=")[1];
+document.querySelector(".ac").removeAttribute("class");
+var b = document.querySelectorAll(".cat a");
+for(var i=0;i<b.length;i++){
+if(b[i].href.split("i=")[1]==k)b[i].classList.add("ac");
+}
+rfr();
+};
+
+if(window.location.href.split("i=")[1]){
+k=window.location.href.split("i=")[1];rfr();
+}else{
+k=12;rfr();
+
+}
+window.onresize = (event) => {document.getElementById("nav").style.left = 0;};
+var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;var f = false;
+document.getElementById("nav").onmousedown = function(e){
+e = e || window.event;
+e.preventDefault();
+if(innerWidth>1105){return false;}
+var el = this;
+pos3 = e.clientX;
+pos4 = e.clientY;
+
+document.onmousemove = function(e){
+e = e || window.event;dr = false;
+
+
+e.preventDefault();
+
+pos1 = pos3 - e.clientX;
+pos2 = pos4 - e.clientY;
+pos3 = e.clientX;
+pos4 = e.clientY;
+//elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+var s = -26-(el.offsetLeft-innerWidth);
+var t = document.getElementById("st").offsetLeft;
+if(s>t){el.style.left=(el.offsetLeft+30)+"px";return;}
+if(el.offsetLeft>0){
+setTimeout(function(){el.style.left=0;return;},800);
+}
+
+
+el.style.left = (el.offsetLeft - pos1) + "px";
+//el.style.right = (el.offsetLeft + pos1) + "px"; 
+if(s>t){el.style.right="0";}
+};
+
+document.onmouseup = function(e){
+document.onmouseup = null;
+document.onmousemove = null;
+setTimeout(function(){dr = true;},200);
+};
+
+};
+
+function gtm(t) {
+var h = new Date(t*1000).getHours();
+var m = new Date(t*1000).getMinutes();
+
+h = (h<10) ? '0' + h : h;
+m = (m<10) ? '0' + m : m;
+
+return h + ':' + m;
+}
+
+
+
+
+
+
+//
+function lz(){
+var loadel;    
+if ("IntersectionObserver" in window) {
+loadel = document.querySelectorAll(".lazy");
+var elObserver = new IntersectionObserver(function(entries, observer) {
+entries.forEach(function(entry) {
+if (entry.isIntersecting) {
+var el = entry.target;
+el.classList.add("anm");
+el.classList.remove("lazy");
+elObserver.unobserve(el);
+        }
+      });
+    });
+
+    loadel.forEach(function(el) {
+      elObserver.observe(el);
+    });
+
+  }
+}
+
+
+</script>
+
+<style>
+body {
+font-family: Verdana,Roboto,"Droid Sans","游ゴシック",YuGothic,"ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN","メイリオ",Meiryo,sans-serif;
+font-size: 14px;background:#333;
+font-weight: 400;
+line-height: 1.5;
+min-height: 100%;
+height: 100%;
+color: #efefef;
+padding:0;
+margin:0;
+}
+#tl {font-size: 16px;font-weight: 600;}
+#tt {position:fixed;color:#fff;left:40%;top:40px;z-index:4;text-align:center;width:20%;height:30px;}
+.mcon {margin-top:300px;text-align:center;z-index: 2;position: relative;}
+.con img{width:320px;}
+#root a span{margin-left:8px;line-height:38px;font-size:22px;font-weight: 600;color:#fff;}
+#fh img{width:100%;height:100%;}
+#fh {position:fixed;left:0;top:0;z-index:-1;text-align:center;width:100%;height:100%;}
+#root {position:fixed;z-index:3;left:0;top:35px;width:100%;height:42px;background:#070bff85}
+#root img{margin-left:10px;width:30px;margin-bottom:-8px;}
+.con span{background:red;color:#fff;padding:0px 4px 0px 4px;}
+span a{color:#fff;}
+.gn{background:#0033ff !important;}
+.con{display: inline-block;position:relative;padding:10px;width:320px;background:#00000060;margin-left:8px;margin-bottom:8px;border-radius:6px;}
+
+a{text-decoration:none;}
+#cl{position:absolute;right:10px;top:10px;z-index:4;background:red;color:#fff;padding:0px 4px 0px 4px;text-align:center;cursor:pointer;}
+
+.prv{position:absolute;left:0;bottom:0;z-index:2;background:rgba(0,0,0,0.6);text-align:center;width:100%;height:100%;display:none;}
+.prv a{position:absolute;top:100px;left:80px;background:red;color:#fff;padding:0px 4px 0px 4px;}
+.prv span{position:absolute;top:100px;left:200px;cursor:pointer;}
+.inf{position:absolute;left:10px;top:10px;background:rgba(0,0,0,0.4);padding:0px 6px 0px 6px;z-index:3;color: #f2ef06;}
+.cat {position:fixed;left:0;top:0;z-index:5;text-align:center;width:100%;background:rgba(0,0,0,0.7);}
+#nav{position:relative;}
+.cat a{font-size:14px;color: #33ffff;
+font-weight: 600;
+line-height: 2.5;padding:10px 10px 9px;}
+
+.cat:hover a{
+  transform:scale(1.5);
+  opacity:1;
+  filter:blur(4px);
+}
+
+.cat a:hover{color: #fff;background:rgba(255, 43, 216,0.6);  transform:scale(2);
+  opacity:1;
+  filter:blur(0);
+  text-decoration:none;
+  color:#fff;}
+
+
+.ac{color: #fff !important;background:#ff0000;}
+#pvd{position:fixed;right:0;bottom:-3px;z-index:3;display:none;padding:10px;background:rgba(0,0,0,0.6);}
+#onl {position:fixed;left:35%;top:50%;z-index:5;text-align:center;width:30%;background:rgba(0,15,240,0.8);font-size:18px;color: #fff;padding:20px 10px 20px;display:none;}
+
+.loader {
+position:fixed;left:50%;top:30%;z-index:5;margin-left:-40px;
+  border: 10px solid #ff000060;
+  border-radius: 50%;
+  border-bottom: 10px solid #ff0000;
+  border-top: 10px solid #ff0000;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.anm{animation: myAnim 1s ease 0s 1 normal none;}
+.con:hover .prv{
+display:block;border-radius:6px;
+animation: mypv 1s ease 0s 1 normal both;
+}
+
+@keyframes myAnim {
+	0% {
+		opacity: 0.6;
+		transform: translateY(250px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
+
+@keyframes mypv {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+
+/*
+#lv{animation:mylv 4s infinite;padding:6px;border-radius:6px;}
+
+@keyframes mylv {
+20%{background:#fff;color: #000;}
+40%{background:#cc0000;color: #ffff00;}
+60%{background:#fff;color: #000;}
+80%{background:#cc0000;color: #ffff00;}
+100%{background:#0000cc;color: #fff;}
+}
+
+
+.ac{background-image: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,1));background-size: auto 5px;background-repeat: no-repeat;background-position: bottom; }
+*/
+</style>
+
+</body>
+</html>
