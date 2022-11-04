@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+
+<h1>The Window Screen Object</h1>
+<h2>Screen Properties</h2>
+
+<h3 id="demo"></h3>
+
+<script>
+let text = "Total width/height: " + screen.width + "*" + screen.height + "<br>" +
+"Available width/height: " + screen.availWidth + "*" + screen.availHeight + "<br>" +
+"Color depth: " + screen.colorDepth + "<br>" +
+"Color resolution: " + screen.pixelDepth;
+
+document.getElementById("demo").innerHTML = text;
+</script>
+
+</body>
+</html>
