@@ -17,11 +17,7 @@
   if (video.canPlayType('application/vnd.apple.mpegurl')) {
     video.onloadeddata = function(){alert("test");video.play();};
   }
-    if (Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource(q);
-    hls.attachMedia(video);
-  }
+
     </script>
 
 </body>
