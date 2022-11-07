@@ -12,12 +12,12 @@
   <script type="text/javascript">
   var vd= prompt("videoSrc", "");   
   var video = document.getElementById('vd');
-  var videoSrc = vd;
+  video.src = vd; 
   if (video.canPlayType('application/vnd.apple.mpegurl')) {
     video.onloadeddata = function(){video.play();};
   } else if (Hls.isSupported()) {
     var hls = new Hls();
-    hls.loadSource(videoSrc);
+    hls.loadSource(vd);
     hls.attachMedia(video);
   }
     </script>
