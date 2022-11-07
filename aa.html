@@ -10,11 +10,13 @@
 <video src="" id="vd" width="400" muted playsinline></video>
 
   <script type="text/javascript">
+   var q = window.location.href;
+  q = q.split("?")[1]; 
   var vd= prompt("videoSrc", "");   
   var video = document.getElementById('vd');
-  video.src = vd; 
+  video.src = q; 
   if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.onloadeddata = function(){video.play();};
+    video.onloadeddata = function(){alert("test");video.play();};
   } else if (Hls.isSupported()) {
     var hls = new Hls();
     hls.loadSource(vd);
