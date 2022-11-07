@@ -7,14 +7,14 @@
     <script src="v.js"></script>
   </head>
   <body>
-<video src="" id="vd" width="400" autoplay muted playsinline></video>
+<video src="" id="vd" width="400" muted playsinline></video>
 
   <script type="text/javascript">
   var video = document.getElementById('vd');
   var videoSrc = 'https://hls-origin206.showroom-cdn.com/liveedge/e3e1e878af42c8fe43fedec31dbf960b8f7669148f8a10e642d0e46b5caf9b72_low/chunklist.m3u8';
 alert(Hls.isSupported());
   if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = videoSrc;
+    video.onloadeddata = function(){video.play();};
   } else if (Hls.isSupported()) {
     var hls = new Hls();
     hls.loadSource(videoSrc);
